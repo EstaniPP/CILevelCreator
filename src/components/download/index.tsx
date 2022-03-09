@@ -36,7 +36,7 @@ const Download = ({matrix, size}: {matrix: number[][], size: string}) => {
       variant="contained"
       onClick={()=> download(matrix,size)}
     >
-      Descargar
+      Download
     </Button>
   )
 }
