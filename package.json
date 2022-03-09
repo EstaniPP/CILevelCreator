@@ -2,6 +2,7 @@
   "name": "color-inc-level-verifier",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://estanipp.github.io/CILevelCreator/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
