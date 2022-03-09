@@ -1,0 +1,46 @@
+.board {
+  margin: 10%;
+}
+
+.field {
+  display: inline-block;
+  border:1px solid black;
+  margin-bottom: -5px;
+  margin-left: -1px;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.back-black {
+  background-color: black;
+  color: black;
+}
+
+.back-white {
+  background-color: white;
+  color:white;
+}
+
+@media (max-width: 500px) {
+  .board {
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
+
+  .field {
+    display: inline-block;
+    border:1px solid black;
+    margin-bottom: -5px;
+    margin-left: -1px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}
