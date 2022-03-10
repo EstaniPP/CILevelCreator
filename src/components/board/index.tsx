@@ -1,17 +1,22 @@
-import { memo, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import './board.css'
 
 const Tile = ({rowIndex, columnIndex, matrix} : {rowIndex: number, columnIndex: number, matrix: number[][]}) => {
-  const value = matrix[rowIndex][columnIndex]
-  const [number, setNumber] = useState(true)
+  const [number, setNumber] = useState(matrix[rowIndex][columnIndex])
+  
   const fillTile = (rowIndex: number, columnIndex: number) => {
-    const newNumber = value ? 0 : 1
-    setNumber(prev => !prev)
+    const newNumber = number ? 0 : 1
+    setNumber(newNumber)
     matrix[rowIndex][columnIndex] = newNumber
   }
+
+  useEffect(()=>{
+    setNumber(matrix[rowIndex][columnIndex])
+  }, [matrix[rowIndex][columnIndex]])
+
   return(
     <div 
-      className={`field ${value ? 'back-black':'back-white'}`}
+      className={`field ${number ? 'back-black':'back-white'}`}
       onClick={()=> fillTile(rowIndex, columnIndex)}
     >
     </div>
