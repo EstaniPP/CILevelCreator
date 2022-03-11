@@ -7,6 +7,12 @@
   background-color: rgb(34, 37, 50);
 }
 
+.imgLogo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
 .Card {
   display: flex;
   align-items: center;
@@ -35,5 +41,9 @@
 
   .App {
     width: 100vw;
+  }
+
+  .imgLogo {
+    display: none;
   }
 }
