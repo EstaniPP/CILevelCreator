@@ -1,35 +1,33 @@
-import { useEffect, useState } from 'react'
 import './board.css'
 
-const Tile = ({ rowIndex, columnIndex, matrix } : {rowIndex: number, columnIndex: number, matrix: number[][]}) => {
-  const [number, setNumber] = useState(matrix[rowIndex][columnIndex])
+type TileType = {
+  rowIndex: number;
+  columnIndex: number;
+  matrix: number[][];
+  onTileClick?: (rowIndex: number, columnIndex: number) => void
+}
 
-  const fillTile = (rowIndex: number, columnIndex: number) => {
-    const newNumber = number ? 0 : 1
-    setNumber(newNumber)
-    matrix[rowIndex][columnIndex] = newNumber
-  }
+type BoardType = {
+  onTileClick?: (rowIndex: number, columnIndex: number) => void
+  matrix: number[][]
+}
 
-  useEffect(() => {
-    setNumber(matrix[rowIndex][columnIndex])
-  }, [matrix[rowIndex][columnIndex]])
-
+const Tile = ({ rowIndex, columnIndex, matrix, onTileClick } : TileType) => {
   return (
     <div
-      className={`field ${number ? 'back-black' : 'back-white'}`}
-      onClick={() => fillTile(rowIndex, columnIndex)}
-    >
-    </div>
+      className={`field ${matrix[rowIndex][columnIndex] ? 'back-black' : 'back-white'}`}
+      onClick={() => onTileClick && onTileClick(rowIndex, columnIndex)}
+    />
   )
 }
-const Board = ({ matrix }: {matrix: number[][]}) => {
+const Board = ({ matrix, onTileClick }: BoardType) => {
   return (
     <div className="board">
       {matrix.map((row, rowIndex) => {
         return (
           <div key={rowIndex}>
               {row.map((_, columnIndex) => {
-                return <Tile key={`${columnIndex}${rowIndex}`} rowIndex={rowIndex} columnIndex={columnIndex} matrix={matrix} />
+                return <Tile key={`${columnIndex}${rowIndex}`} rowIndex={rowIndex} columnIndex={columnIndex} matrix={matrix} onTileClick={onTileClick}/>
               })}
           </div>
         )

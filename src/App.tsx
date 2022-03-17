@@ -21,8 +21,25 @@ function App () {
     setMatrix(new Array(height).fill(0).map(() => Array(6).fill(0)))
   }, [size])
 
+  useEffect(() => {
+    setBoard(<Board matrix={matrix} onTileClick={fillTile}/>)
+  }, [matrix])
+
+  const fillTile = (rowIndex: number, columnIndex: number) => {
+    const newNumber = matrix[rowIndex][columnIndex] ? 0 : 1
+    matrix[rowIndex][columnIndex] = newNumber
+    setBoard(<Board matrix={matrix} onTileClick={fillTile}/>)
+  }
+
+  const [board, setBoard] = useState(
+    <Board
+      matrix={matrix}
+      onTileClick={fillTile}
+    />
+  )
+
   return (
-    <div className='App' style={{ height: window.innerHeight }}>
+    <div className='App' style={{ height: window.innerHeight, minHeight: '700px' }}>
       <img className='imgLogo' src={logo} alt="PipPop! logo"/>
       <Card className='Card'>
             <h1>Color Inc level creator</h1>
@@ -31,7 +48,7 @@ function App () {
                 size={size}
                 setSize={setSize}
               />
-              <Board matrix={matrix}/>
+              { board }
             </div>
             <Download matrix={matrix} size={size}/>
       </Card>
