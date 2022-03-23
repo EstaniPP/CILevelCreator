@@ -1,8 +1,10 @@
 
 import Button from '@mui/material/Button'
+import { levelType } from '../../types'
+import db from '../../db'
 
-const format = (matrix: number[][], size: string) : string => {
-  const file:{id: number, difficulty:string, rows:Array<{config: string}>} = {
+const format = (matrix: number[][], size: string) : levelType => {
+  const file:levelType = {
     id: 0,
     difficulty: size,
     rows: []
@@ -17,12 +19,12 @@ const format = (matrix: number[][], size: string) : string => {
       }
     )
   })
-  return JSON.stringify(file, null, 4)
+  return file
 }
 
 const download = (matrix: number[][], size: string) => {
   const element = window.document.createElement('a')
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(format(matrix, size)))
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(format(matrix, size), null, 4)))
   element.setAttribute('download', 'Exercise')
   element.style.display = 'none'
   window.document.body.appendChild(element)
@@ -30,13 +32,17 @@ const download = (matrix: number[][], size: string) => {
   window.document.body.removeChild(element)
 }
 
+const upload = (matrix: number[][], size: string) => {
+  db.addNewLevel(format(matrix, size))
+}
+
 const Download = ({ matrix, size }: {matrix: number[][], size: string}) => {
   return (
     <Button
       variant="contained"
-      onClick={() => download(matrix, size)}
+      onClick={() => upload(matrix, size)}
     >
-      Download
+      Upload
     </Button>
   )
 }
