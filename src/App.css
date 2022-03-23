@@ -1,49 +1,36 @@
 .App {
   width: 100vw;
+  height: calc(100vh - 86px);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   background-color: rgb(34, 37, 50);
+  padding-top: 86px;
 }
 
-.imgLogo {
+nav {
   position: absolute;
-  top: 10px;
-  left: 10px;
-}
-
-.Card {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding-bottom: 30px;
-}
-
-.Form {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
   width: 100%;
-  height:100%;
+  top: 0px;
+  left: 0px;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 86px;
 }
-@media (max-width: 500px) {
-  .Card {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    height:100%;
-  }
 
-  .App {
-    width: 100vw;
-  }
+nav ul {
+  padding-right: 10px;
+  list-style-type: none;
+  margin: 0px;
+}
 
-  .imgLogo {
-    display: none;
-  }
+ul li {
+  padding: 10px;
+  float: left;
+  color: white;
+}
+.imgLogo {
+  margin: 10px;
 }

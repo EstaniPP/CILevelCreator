@@ -2,7 +2,7 @@ import './boardForm.css'
 import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { Typography } from '@mui/material'
-import { heights } from '../../App'
+import { heights } from '../../routes/levelCreator'
 
 type BoardFormType = {
   size:string,
