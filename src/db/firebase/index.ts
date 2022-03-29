@@ -1,15 +1,42 @@
-import { initializeApp } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore'
+import { FirebaseOptions, initializeApp } from 'firebase/app'
+import { getFirestore, doc, setDoc, collection, getDocs, getDoc } from 'firebase/firestore'
+import { levelType } from '../../types'
+import { createIndex } from '../../utils/fileManager'
+
+const process = import.meta.env
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyC8k7h6v4HEv7qFNMri1mh7ZyZXCBDywi8',
-  authDomain: 'color-inc-levels-api.firebaseapp.com',
-  projectId: 'color-inc-levels-api',
-  storageBucket: 'color-inc-levels-api.appspot.com',
-  messagingSenderId: '425715278139',
-  appId: '1:425715278139:web:d800af3741e7c29feed71e'
-}
+  apiKey: process.VITE_APIKEY,
+  authDomain: process.VITE_AUTHDOMAIN,
+  projectId: process.VITE_PROJECTID,
+  storageBucket: process.VITE_STORAGEBUCKET,
+  messagingSenderId: process.VITE_MESSAGINGSENDERID,
+  appId: process.VITE_APPID
+} as FirebaseOptions
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
 
-export default getFirestore(app)
+const db = getFirestore(app)
+
+const addNewLevel = async (level : levelType) => {
+  const docRef = doc(db, level.difficulty, createIndex(level))
+  const docSnap = await getDoc(docRef)
+  if (!docSnap.exists()) {
+    setDoc(doc(db, level.difficulty, createIndex(level)), { ...level, id: createIndex(level) }).then((data) => { console.log('data', data) })
+    return true
+  } else {
+    return false
+  }
+}
+
+const getLevels = async (difficulty: string) => {
+  const levels : levelType[] = [];
+  (await getDocs(collection(db, difficulty))).forEach(doc => {
+    levels.push(doc.data() as levelType)
+  })
+  return levels
+}
+
+export { addNewLevel, getLevels }

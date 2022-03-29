@@ -1,18 +1,12 @@
-import db from './firebase'
-import { doc, setDoc, collection, getDocs } from 'firebase/firestore'
+import { addNewLevel as addNewLevelF, getLevels as getLevelsF } from './firebase'
 import { levelType } from '../types'
 
-const createIndex = (level: levelType) => {
-  let binaryId = ''
-  level.rows.forEach((row) => {
-    binaryId += row.config
-  })
-  return parseInt(binaryId, 2).toString()
-}
-
 const addNewLevel = async (level : levelType) => {
-  await getDocs(collection(db, 'easy'))
-  setDoc(doc(db, level.difficulty, createIndex(level)), { ...level, id: createIndex(level) }).then((data) => { console.log('data', data) })
+  return addNewLevelF(level)
 }
 
-export default { addNewLevel }
+const getLevels = async (difficulty: string) => {
+  return await getLevelsF(difficulty)
+}
+
+export { addNewLevel, getLevels }

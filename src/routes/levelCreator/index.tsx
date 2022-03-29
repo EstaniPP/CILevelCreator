@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Board from '../../components/board'
 import BoardForm from '../../components/boardForm'
-import Download from '../../components/download'
+import Upload from '../../components/upload'
 import Card from '@mui/material/Card'
 import './creator.css'
 
@@ -47,7 +47,7 @@ function Creator () {
         />
         { board }
       </div>
-      <Download matrix={matrix} size={size}/>
+      <Upload matrix={matrix} size={size}/>
     </Card>
   )
 }

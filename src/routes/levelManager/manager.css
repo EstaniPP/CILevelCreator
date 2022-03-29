@@ -4,8 +4,21 @@
   justify-content: center;
   flex-direction: column;
   padding-bottom: 30px;
-  width:500px;
-  min-width: 500px;
+}
+
+.LevelPaginator {
+  display: flex;
+  align-items: center;
+  margin: 10px
+}
+
+.PaginationButton {
+  min-width: 0px;
+}
+
+.Typography {
+  text-align: center;
+  width: 150px;
 }
 
 .Form {
@@ -24,6 +37,5 @@
     justify-content: space-between;
     width: 100%;
     height:100%;
-    min-width: auto;
   }
 }

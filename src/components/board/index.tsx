@@ -16,6 +16,7 @@ const Tile = ({ rowIndex, columnIndex, matrix, onTileClick } : TileType) => {
   return (
     <div
       className={`field ${matrix[rowIndex][columnIndex] ? 'back-black' : 'back-white'}`}
+      style={{ cursor: onTileClick && 'pointer' }}
       onClick={() => onTileClick && onTileClick(rowIndex, columnIndex)}
     />
   )
