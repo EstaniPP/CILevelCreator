@@ -10,4 +10,13 @@ const boardSize = atom<keyof typeof heights>('medium')
 const showLoginBanner = atom(false)
 const errorLoginMessage = atom('')
 
-export { showSucessBanner, successBannerMsj, showLoginBanner, errorLoginMessage, boardSize }
+const showDeleteBanner = atom(false)
+
+export {
+  showSucessBanner,
+  successBannerMsj,
+  showLoginBanner,
+  errorLoginMessage,
+  boardSize,
+  showDeleteBanner
+}

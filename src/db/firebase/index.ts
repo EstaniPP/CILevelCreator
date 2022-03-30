@@ -1,5 +1,5 @@
 import { FirebaseOptions, initializeApp } from 'firebase/app'
-import { getFirestore, doc, setDoc, collection, getDocs, getDoc } from 'firebase/firestore'
+import { getFirestore, doc, setDoc, collection, getDocs, getDoc, deleteDoc } from 'firebase/firestore'
 import { levelType } from '../../types'
 import { createIndex } from '../../utils/fileManager'
 
@@ -39,4 +39,13 @@ const getLevels = async (difficulty: string) => {
   return levels
 }
 
-export { addNewLevel, getLevels }
+const deleteLevel = async (difficulty: string, id: number, levels: levelType[]) => {
+  try {
+    await deleteDoc(doc(db, difficulty, id.toString()))
+    return levels.filter(level => level.id !== id)
+  } catch (error:any) {
+    throw error.message
+  }
+}
+
+export { addNewLevel, getLevels, deleteLevel }
