@@ -1,6 +1,9 @@
 # Color Inc Level Creator
 
-This is small project made for PipPop! Studios and it's to create levels for the Color Inc game with an interactive user interface that has a download button that downloads a txt file with the json structure of the level.
+This is small project made for PipPop! Studios and it's to create levels for the Color Inc game with an interactive user.
+This app allows user to login, create, delete and download Color Inc levels.
+
+Levels and authentication are all managed by Firebase.
 
 ## Technologies
 
@@ -9,6 +12,9 @@ This is small project made for PipPop! Studios and it's to create levels for the
 - Typescript
 - Material UI
 - ESLint
+- Jotai
+- Firebase
+- Firestore
 
 ## Build and deploy steps
 

@@ -24,7 +24,7 @@ const addNewLevel = async (level : levelType) => {
   const docRef = doc(db, level.difficulty, createIndex(level))
   const docSnap = await getDoc(docRef)
   if (!docSnap.exists()) {
-    setDoc(doc(db, level.difficulty, createIndex(level)), { ...level, id: createIndex(level) }).then((data) => { console.log('data', data) })
+    await setDoc(doc(db, level.difficulty, createIndex(level)), { ...level, id: createIndex(level) })
     return true
   } else {
     return false

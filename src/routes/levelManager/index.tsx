@@ -47,7 +47,6 @@ function Manager () {
 
   const handleDelete = async () => {
     setAllLevels(await deleteLevel(difficulty, allLevels[index]?.id, allLevels))
-    console.log('a')
     setShow(true)
   }
 
