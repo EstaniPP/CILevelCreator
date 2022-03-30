@@ -6,9 +6,13 @@ import TextField from '@mui/material/TextField'
 import './login.css'
 import { Button } from '@mui/material'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { showLoginBanner } from '../../state'
+import { useAtom } from 'jotai'
+import { LoginAlert } from './MessageAlert'
 
 function Creator () {
   const { user, signin } = useAuth()
+  const [, setShow] = useAtom(showLoginBanner)
   const [email, setEmail] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
   const navigate = useNavigate()
@@ -23,9 +27,13 @@ function Creator () {
     event.preventDefault()
     const success = await signin(email, password)
     if (success) navigate('/CILevelCreator/create')
+    else {
+      setShow(true)
+    }
   }
   return (
     <>
+      <LoginAlert/>
       {user &&
         <Navigate to='/CILevelCreator/create'/>
       }
@@ -36,7 +44,6 @@ function Creator () {
             className='TextField'
             onChange={handleEmailChange}
             value={email}
-            id="standard-basic"
             label="Email"
             variant="standard"
           />
@@ -44,7 +51,6 @@ function Creator () {
             className='TextField'
             onChange={handlePasswordChange}
             value={password}
-            id="standard-basic"
             label="Password"
             variant="standard"
             type="password"

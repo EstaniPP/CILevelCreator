@@ -6,7 +6,7 @@ import Card from '@mui/material/Card'
 import './creator.css'
 import { useAtom } from 'jotai'
 import { boardSize } from '../../state'
-import { SuccessAlert } from './SuccessAlert'
+import { MessageAlert } from './MessageAlert'
 
 export const heights = {
   easy: 4,
@@ -31,7 +31,7 @@ function Creator () {
 
   return (
     <>
-      <SuccessAlert />
+      <MessageAlert />
       <Card className='Card'>
         <h1>Color Inc level creator</h1>
         <div className='Form'>

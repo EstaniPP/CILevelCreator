@@ -7,4 +7,7 @@ const showSucessBanner = atom(false)
 const successBannerMsj = atom<AlertColor>('success')
 const boardSize = atom<keyof typeof heights>('medium')
 
-export { showSucessBanner, successBannerMsj, boardSize }
+const showLoginBanner = atom(false)
+const errorLoginMessage = atom('')
+
+export { showSucessBanner, successBannerMsj, showLoginBanner, errorLoginMessage, boardSize }

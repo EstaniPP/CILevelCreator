@@ -1,11 +1,13 @@
 import { useAtom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 import { getAuth, signInWithEmailAndPassword, signOut, User } from 'firebase/auth'
+import { errorLoginMessage } from '../../state'
 
 const userName = atomWithStorage<User | null>('CISignedInUser', null)
 
 export function useAuth () {
   const [user, setUser] = useAtom(userName)
+  const [, setErrorMessage] = useAtom(errorLoginMessage)
 
   const signin = async (email: string, password: string) => {
     const auth = getAuth()
@@ -17,7 +19,8 @@ export function useAuth () {
         return true
       }
     } catch (error:any) {
-      console.log(error.code)
+      console.error(error.code)
+      setErrorMessage(error.code)
     }
     return false
   }

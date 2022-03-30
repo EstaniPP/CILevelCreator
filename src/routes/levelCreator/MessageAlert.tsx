@@ -3,7 +3,7 @@ import { Close } from '@mui/icons-material'
 import { useAtom } from 'jotai'
 import { showSucessBanner, successBannerMsj } from '../../state'
 
-export const SuccessAlert = () => {
+export const MessageAlert = () => {
   const [success] = useAtom(successBannerMsj)
   const [show, setShow] = useAtom(showSucessBanner)
 
