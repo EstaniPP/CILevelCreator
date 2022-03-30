@@ -3,14 +3,11 @@ import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { Typography } from '@mui/material'
 import { heights } from '../../routes/levelCreator'
+import { useAtom } from 'jotai'
+import { boardSize } from '../../state'
 
-type BoardFormType = {
-  size:string,
-  // eslint-disable-next-line no-undef
-  setSize: React.Dispatch<React.SetStateAction<keyof typeof heights>>
-}
-
-const BoardForm = ({ size, setSize } : BoardFormType) => {
+const BoardForm = () => {
+  const [size, setSize] = useAtom(boardSize)
   const handleChange = (event: SelectChangeEvent) => {
     setSize(event.target.value as keyof typeof heights)
   }

@@ -7,14 +7,15 @@ import { levelType } from '../../types'
 import Board from '../../components/board'
 import { Typography } from '@mui/material'
 import BoardForm from '../../components/boardForm'
-import { heights } from '../../routes/levelCreator'
+import { useAtom } from 'jotai'
 import { download } from '../../utils/fileManager'
+import { boardSize } from '../../state'
 
 function Manager () {
   const [allLevels, setAllLevels] = useState<levelType[]>([])
   const [matrix, setMatrix] = useState<number[][]>([])
   const [index, setIndex] = useState(0)
-  const [difficulty, setDifficulty] = useState<keyof typeof heights>('medium')
+  const [difficulty] = useAtom(boardSize)
 
   const getMatrix = (level: levelType) => {
     return level.rows.map(row => row.config.split('').map(char => parseInt(char)))
@@ -45,7 +46,7 @@ function Manager () {
   return (
     <Card className='Card'>
       <h1>Manage Levels</h1>
-      <BoardForm size={difficulty} setSize={setDifficulty} />
+      <BoardForm/>
       { allLevels.length === 0 &&
       <Typography>There are no {difficulty} levels.</Typography>
       }

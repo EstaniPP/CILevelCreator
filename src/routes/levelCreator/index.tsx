@@ -4,6 +4,9 @@ import BoardForm from '../../components/boardForm'
 import Upload from '../../components/upload'
 import Card from '@mui/material/Card'
 import './creator.css'
+import { useAtom } from 'jotai'
+import { boardSize } from '../../state'
+import { SuccessAlert } from './SuccessAlert'
 
 export const heights = {
   easy: 4,
@@ -12,7 +15,7 @@ export const heights = {
 }
 
 function Creator () {
-  const [size, setSize] = useState<keyof typeof heights>('medium')
+  const [size] = useAtom(boardSize)
   const [matrix, setMatrix] = useState(Array<number>(6).fill(0).map(() => Array<number>(6).fill(0)))
 
   useEffect(() => {
@@ -20,35 +23,27 @@ function Creator () {
     setMatrix(new Array(height).fill(0).map(() => Array(6).fill(0)))
   }, [size])
 
-  useEffect(() => {
-    setBoard(<Board matrix={matrix} onTileClick={fillTile}/>)
-  }, [matrix])
-
   const fillTile = (rowIndex: number, columnIndex: number) => {
     const newNumber = matrix[rowIndex][columnIndex] ? 0 : 1
     matrix[rowIndex][columnIndex] = newNumber
-    setBoard(<Board matrix={matrix} onTileClick={fillTile}/>)
+    setMatrix([...matrix])
   }
 
-  const [board, setBoard] = useState(
-    <Board
-      matrix={matrix}
-      onTileClick={fillTile}
-    />
-  )
-
   return (
-    <Card className='Card'>
-      <h1>Color Inc level creator</h1>
-      <div className='Form'>
-        <BoardForm
-          size={size}
-          setSize={setSize}
-        />
-        { board }
-      </div>
-      <Upload matrix={matrix} size={size}/>
-    </Card>
+    <>
+      <SuccessAlert />
+      <Card className='Card'>
+        <h1>Color Inc level creator</h1>
+        <div className='Form'>
+          <BoardForm />
+          <Board
+            matrix={matrix}
+            onTileClick={fillTile}
+          />
+        </div>
+        <Upload matrix={matrix} size={size} />
+      </Card>
+    </>
   )
 }
 

@@ -3,8 +3,8 @@ import Button from '@mui/material/Button'
 import { levelType } from '../../types'
 import { addNewLevel } from '../../db'
 import { useEffect, useState } from 'react'
-import { Alert, AlertColor, Collapse, IconButton } from '@mui/material'
-import { Close } from '@mui/icons-material'
+import { useAtom } from 'jotai'
+import { showSucessBanner, successBannerMsj } from '../../state'
 
 const format = (matrix: number[][], size: string) : levelType => {
   const file:levelType = {
@@ -26,9 +26,9 @@ const format = (matrix: number[][], size: string) : levelType => {
 }
 
 const Upload = ({ matrix, size }: {matrix: number[][], size: string}) => {
-  const [success, setSuccess] = useState<AlertColor>()
+  const [, setSuccess] = useAtom(successBannerMsj)
   const [loading, setLoading] = useState(false)
-  const [show, setShow] = useState(false)
+  const [, setShow] = useAtom(showSucessBanner)
 
   const upload = async (matrix: number[][], size: string) => {
     setLoading(true)
@@ -44,28 +44,9 @@ const Upload = ({ matrix, size }: {matrix: number[][], size: string}) => {
 
   useEffect(() => {
     setShow(false)
-  }, [size])
+  }, [size, matrix])
 
   return (
-    <>
-      <Collapse in={show}>
-        <Alert
-          severity={success}
-          action={<IconButton
-            aria-label="close"
-            color="inherit"
-            size="small"
-            onClick={() => {
-              setShow(false)
-            } }
-          >
-            <Close/>
-          </IconButton>}
-          sx={{ mb: 2 }}
-        >
-          {success === 'success' ? 'Level created succesfully!' : 'Level already exists, please create a new one.'}
-        </Alert>
-      </Collapse>
       <Button
         disabled={loading}
         variant="contained"
@@ -73,7 +54,6 @@ const Upload = ({ matrix, size }: {matrix: number[][], size: string}) => {
       >
         Upload
       </Button>
-    </>
   )
 }
 
