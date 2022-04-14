@@ -10,6 +10,7 @@ export const MessageAlert = () => {
   return (
     <Collapse in={show}>
     <Alert
+      style={{ width: 'calc(100vw - 40px)', maxWidth: '468px' }}
       severity={success}
       action={<IconButton
         aria-label="close"

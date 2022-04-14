@@ -1,0 +1,73 @@
+nav {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 86px;
+  background-color: rgb(34, 37, 50);
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+  list-style-type: none;
+  margin: 0px;
+}
+
+.MuiMenu-paper {
+  background-color: rgb(34, 37, 50);
+}
+
+.nav{
+  padding: 10px;
+  padding-left: 30px;
+  float: left;
+  color: white;
+  font-weight: bold;
+  font-size: large;
+  text-decoration: none;
+  cursor: pointer
+}
+
+.mobileNavBar {
+  display: none;
+}
+
+.imgLogo {
+  margin: 10px;
+}
+
+@media (max-width: 500px) {
+
+  ul a {
+    padding-left: 5px;
+  }
+
+  .desktopNavBar {
+    display: none;
+  }
+
+  .mobileNavBar {
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+    list-style-type: none;
+    margin: 0px;
+  }
+
+  .nav{
+    padding: 10px;
+    float: left;
+    color: black;
+    font-weight: bold;
+    font-size: large;
+    text-decoration: none;
+    cursor: pointer
+  }
+  
+  
+}
